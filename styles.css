@@ -78,6 +78,11 @@ main {
     border-radius: 90px;
 }
 
+#ciudad{
+    width: 80%;
+    text-align: center;
+}
+
 .graficos {
     margin-top: 15px;
     display: flex;
