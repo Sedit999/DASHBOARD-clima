@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+    <!--Font Abel-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet">
     <!--Link CSS-->
     <link rel="stylesheet" href="styles.css">
     <title>Clima</title>
@@ -15,35 +18,34 @@
     
     <header>
         <div>
-            <img src="" alt="">
-                <h2>El clima en tu ciudad</h2>
-            </img>
+            <img src="" alt=""></img>
         </div>
     </header>
 
     <main>
-        <div>
-            <img src="" alt="">
-            <h1></h1>
-            <p></p>
-            <p></p>
+        <div class="datosClima">
+            <h1 id="ciudad"></h1>
+            <h2 id="temperatura"></h2>
+            <h2 id="clima"></h2>
         </div>
-        <div>
-            <div>
-                <canvas></canvas>
+        <div class="graficos">
+            <div id="grafico1" class="grafico">
+                <canvas id="humedad"></canvas>
+                <p id="porcentajeGrafico1" class="porcentaje"></p>
             </div>
-            <div>
-                <canvas></canvas>
+            <div id="grafico2" class="grafico">
+                <canvas id="viento"></canvas>
+                <p id="porcentajeGrafico2" class="porcentaje"></p>
             </div>
-            <div>
-                <canvas></canvas>
+            <div id="grafico3" class="grafico">
+                <canvas id="maxTemp"></canvas>
+                <p id="porcentajeGrafico3" class="porcentaje"></p>
             </div>
         </div>
     </main>
 
     <footer>
         <h3>Created by Sedit999</h3>
-        <h4>API by OpenWeather</h4>
     </footer>
 
     <script src="index.js"></script>

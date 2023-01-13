@@ -1,0 +1,83 @@
+* {
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    position: relative;
+    padding-bottom: 50px;
+    min-height: 100vh;
+    font-family: 'Abel', sans-serif;
+}
+
+header {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+header div {
+    background-color: red;
+    width: 50px;
+    height: 50px;
+}
+
+main {
+    margin: 10px 20px;
+    border: 1px solid red;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+}
+
+.datosClima {
+    border: 1px solid blue;
+    width: 95%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.graficos {
+    display: flex;
+    border: 1px solid blue;
+    width: 70%;
+    height: fit-content;
+    padding: 5px;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.grafico {
+    width: 100px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.porcentaje {
+    height: 30px;
+    width: 200px;
+    border: 1px solid green;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
