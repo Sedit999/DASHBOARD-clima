@@ -11,6 +11,30 @@ body{
     font-family: 'Abel', sans-serif;
 }
 
+.soleado{
+    background: url('./img/soleado.jpg') no-repeat center center/cover;
+}
+
+.nublado{
+    background: url('./img/nublado.jpg') no-repeat center center/cover;
+}
+
+.nevado{
+    background: url('./img/nevado.jpg') no-repeat center center/cover;
+}
+
+.neblina{
+    background: url('./img/neblina.jpg') no-repeat center center/cover;
+}
+
+.lluvioso{
+    background: url('./img/lluvioso.jpg') no-repeat center center/cover;
+}
+
+.electrica{
+    background: url('./img/electrica.jpg') no-repeat center center/cover;
+}
+
 header {
     width: 100%;
     height: 80px;
@@ -27,7 +51,6 @@ header div {
 
 main {
     margin: 10px 20px;
-    border: 1px solid red;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -36,7 +59,6 @@ main {
 }
 
 .datosClima {
-    border: 1px solid blue;
     width: 95%;
     display: flex;
     justify-content: space-around;
@@ -46,7 +68,6 @@ main {
 
 .graficos {
     display: flex;
-    border: 1px solid blue;
     width: 70%;
     height: fit-content;
     padding: 5px;
@@ -67,7 +88,6 @@ main {
 .porcentaje {
     height: 30px;
     width: 200px;
-    border: 1px solid green;
     display: flex;
     align-items: center;
     justify-content: center;

@@ -5,8 +5,11 @@ let minimaTemp;
 let ciudad;
 let temperatura;
 let clima;
-let lat
-let lon
+let lat;
+let lon;
+let selctorDeClima;
+
+
 
 const funcionInicial = () => {
     if(!"geolocation" in navigator){
@@ -47,6 +50,7 @@ setTimeout( () => {
         clima = data.weather.map ((e)=>{
             return e.main
         })
+        
         })
     },3000)
 
@@ -120,13 +124,24 @@ setTimeout(()=>{
     }
     }
     )
-
+    
+    
     document.getElementById('porcentajeGrafico1').textContent = `${valorHumedad}%`
     document.getElementById('porcentajeGrafico2').textContent = `${valorViento} km/h`
     document.getElementById('porcentajeGrafico3').textContent = `max ${maximaTemp}°C / min ${minimaTemp}°C`
     document.getElementById('ciudad').textContent = `${ciudad}`
     document.getElementById('temperatura').textContent = `${temperatura}°C`
     document.getElementById('clima').textContent = `${clima}`
+   
+    if (clima[0] === 'Thunderstorm'){selctorDeClima='electrica'}
+    if (clima[0] === 'Drizzle'){selctorDeClima='lluvioso'}
+    if (clima[0] === 'Rain'){selctorDeClima='lluvioso'}
+    if (clima[0] === 'Snow'){selctorDeClima='nevado'}
+    if (clima[0] === 'Clear'){selctorDeClima='soleado'}
+    if (clima[0] === 'Clouds'){selctorDeClima='nublado'}
+    else{selctorDeClima='neblina'}
+    console.log(selctorDeClima)
+    document.querySelector('body').className=`${selctorDeClima}`
 },5000)
 
 
