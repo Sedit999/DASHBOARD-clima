@@ -8,6 +8,12 @@ let clima;
 let lat;
 let lon;
 let selctorDeClima;
+let sensacionTermica;
+let amanecerUnix;
+let atardecerUnix;
+let visivilidad;
+let contadorViento = 0;
+
 
 
 
@@ -28,7 +34,7 @@ const funcionInicial = () => {
     const configSolicitud = {
         enableHighAccuracy: true,
         maximumAge: 0,
-        timeout: 10000
+        timeout: 5000
     }
 
     navigator.geolocation.getCurrentPosition(ubicacionConcedida, errUbicacion, configSolicitud)
@@ -41,18 +47,21 @@ setTimeout( () => {
     fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=7ced97c55afa67e9b4fb3828448b9007&units=metric`)
         .then(response => response.json())
         .then(data => {
-        valorHumedad = data.main.humidity
-        valorViento = data.wind.speed
-        maximaTemp = data.main.temp_max
-        minimaTemp = data.main.temp_min
-        ciudad = data.name
+        valorHumedad = data.main.humidity;
+        valorViento = data.wind.speed;
+        maximaTemp = data.main.temp_max;
+        minimaTemp = data.main.temp_min;
+        ciudad = data.name;
         temperatura = data.main.temp
         clima = data.weather.map ((e)=>{
             return e.main
+        });
+        sensacionTermica = data.main.feels_like;
+        amanecerUnix = data.sys.sunrise;
+        atardecerUnix = data.sys.sunset;
+        visivilidad = (data.visibility)/1000;
         })
-        
-        })
-    },3000)
+    },6000)
 
 
 setTimeout(()=>{
@@ -60,7 +69,7 @@ setTimeout(()=>{
     new Chart( humedad, {
         type: 'doughnut',
         data: {
-            labels: ['humedad'],
+            labels: ['Humedad'],
             datasets: [
                 {
                     label: 'Humedad',
@@ -68,6 +77,7 @@ setTimeout(()=>{
                     backgroundColor: [
                         'rgb(54, 162, 235)',
                     ],
+                    borderColor: 'rgb(8, 17, 145)'
                 },
             
             ],
@@ -78,7 +88,7 @@ setTimeout(()=>{
     }
     }
     )
-
+    if(valorViento === 0){valorViento += 1; contadorViento = 1} 
     const viento = document.getElementById('viento')
     new Chart( viento, {
         type: 'doughnut',
@@ -88,7 +98,7 @@ setTimeout(()=>{
                 {
                     data: [valorViento],
                     backgroundColor: [
-                        'rgb(54, 162, 235)',
+                        'rgb(201, 201, 201)',
                     ],
                 },
             
@@ -111,9 +121,10 @@ setTimeout(()=>{
                     label: 'max Temp, min Temp',
                     data: [maximaTemp, minimaTemp],
                     backgroundColor: [
-                        'rgb(54, 162, 235)',
-                        'rgb(70, 150, 220)',
+                        'rgb(235, 187, 54)',
+                        'rgb(218, 220, 70)',
                     ],
+                    borderColor: 'rgb(197, 112, 14)'
                 },
             
             ],
@@ -125,29 +136,49 @@ setTimeout(()=>{
     }
     )
     
-    
-    document.getElementById('porcentajeGrafico1').textContent = `${valorHumedad}%`
+    document.getElementById('porcentajeGrafico1').textContent = `${valorHumedad}%`;
+    if(contadorViento === 1){valorViento = 0}
     document.getElementById('porcentajeGrafico2').textContent = `${valorViento} km/h`
     document.getElementById('porcentajeGrafico3').textContent = `max ${maximaTemp}°C / min ${minimaTemp}°C`
     document.getElementById('ciudad').textContent = `${ciudad}`
     document.getElementById('temperatura').textContent = `${temperatura}°C`
     document.getElementById('clima').textContent = `${clima}`
+    let amanecer = new Date(amanecerUnix * 1000);
+    let atardecer = new Date(atardecerUnix * 1000);
+    let informacion =  `
+        <ul>
+            <li>Sensación termica: ${sensacionTermica} °C</li>
+            <li>Amanecer: ${amanecer.getHours()} : ${amanecer.getMinutes()} hrs</li>
+            <li>Atardecer: ${atardecer.getHours()} : ${atardecer.getMinutes()} hrs</li>
+            <li>Visivilidad: ${visivilidad} km</li>
+        </ul>`;
+    document.getElementById('informacionAdicional').innerHTML = informacion
+
    
-    if (clima[0] === 'Thunderstorm'){selctorDeClima='electrica'}
-    if (clima[0] === 'Drizzle'){selctorDeClima='lluvioso'}
-    if (clima[0] === 'Rain'){selctorDeClima='lluvioso'}
-    if (clima[0] === 'Snow'){selctorDeClima='nevado'}
-    if (clima[0] === 'Clear'){selctorDeClima='soleado'}
-    if (clima[0] === 'Clouds'){selctorDeClima='nublado'}
-    else{selctorDeClima='neblina'}
-    console.log(selctorDeClima)
+    switch(clima[0]){
+        case 'Thunderstorm' : selctorDeClima='electrica'
+        break;
+        case 'Drizzle' : selctorDeClima='lluvioso' 
+        break;
+        case 'Rain' : selctorDeClima='lluvioso'
+        break;
+        case 'Snow' : selctorDeClima='nevado' 
+        break;
+        case 'Clear' : selctorDeClima='soleado'
+        break;
+        case 'Clouds' : selctorDeClima='nublado'
+        break;
+        default : selctorDeClima='neblina'
+        break;
+    }
     document.querySelector('body').className=`${selctorDeClima}`
-},5000)
+},7000)
 
 
 function conversionGrafica(valor){
     return (valor*360)/100
 }
+
 
 
 document.addEventListener("DOMContentLoaded", funcionInicial);
