@@ -33,8 +33,8 @@ const funcionInicial = () => {
 
     const configSolicitud = {
         enableHighAccuracy: true,
+        timeout: 5000,
         maximumAge: 0,
-        timeout: 5000
     }
 
     navigator.geolocation.getCurrentPosition(ubicacionConcedida, errUbicacion, configSolicitud)
@@ -61,6 +61,7 @@ setTimeout( () => {
         atardecerUnix = data.sys.sunset;
         visivilidad = (data.visibility)/1000;
         })
+        
     },6000)
 
 
@@ -147,7 +148,7 @@ setTimeout(()=>{
     let atardecer = new Date(atardecerUnix * 1000);
     let informacion =  `
         <ul>
-            <li>Sensación termica: ${sensacionTermica} °C</li>
+            <li>Sensación térmica: ${sensacionTermica} °C</li>
             <li>Amanecer: ${amanecer.getHours()} : ${amanecer.getMinutes()} hrs</li>
             <li>Atardecer: ${atardecer.getHours()} : ${atardecer.getMinutes()} hrs</li>
             <li>Visivilidad: ${visivilidad} km</li>
@@ -172,8 +173,16 @@ setTimeout(()=>{
         break;
     }
     document.querySelector('body').className=`${selctorDeClima}`
+    document.getElementById('cargando').textContent = ''
+    document.getElementById('header').innerHTML = `
+        <img src="./img/LogoWhite.png" alt="logo">
+    `
+    
 },7000)
 
+setTimeout(()=>{
+   clima == undefined ? window.location.reload() : console.log('todo bien')
+}, 12000)
 
 function conversionGrafica(valor){
     return (valor*360)/100

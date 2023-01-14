@@ -57,6 +57,9 @@ header div {
     justify-content: center;
     align-items: center;
 }
+ img {
+    width: 100px;
+ }
 
 main {
     margin: 10px 20px;
@@ -69,6 +72,7 @@ main {
 
 .datosClima {
     width: 95%;
+    margin-top: 15px;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -132,6 +136,8 @@ footer {
     position: absolute;
     bottom: 0;
     width: 100%;
+    background-color: rgba(31, 31, 31, 0.712);
+    color: rgb(226, 226, 226);
 }
 
 @media (max-width: 789px){
